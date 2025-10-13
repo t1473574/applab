@@ -1,2 +1,2 @@
-# Aplikasi Website
-Ini adalah web yang belum memiliki konten tertentu
+# Webside Hotel Idaman
+Hotel Idaman merupakan website yang terdiri dari checkout hotel
