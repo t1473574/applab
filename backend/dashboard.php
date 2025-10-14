@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'include/koneksi.php';
-include 'include/cek_login.php';
+include '.../lib/koneksi.php';
+include '.../cek_login.php';
 ?>
 
 <!DOCTYPE html>

@@ -1,3 +1,3 @@
 <?php 
-    $conn = new mysqli('localhost','root','blackfurry','db_hotel');
+    $conn = new mysqli('localhost','root','tia12345','db_hotel');
 ?>
