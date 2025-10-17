@@ -9,7 +9,7 @@ if (isset($_SESSION['username'])) {
 <html>
 <head>
     <title>Login Admin Hotel</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Kelola Banner</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">
@@ -12,7 +12,7 @@
     <table>
         <tr><th>ID</th><th>Judul</th><th>Gambar</th><th>Aksi</th></tr>
         <?php
-        $query = mysqli_query($koneksi, "SELECT * FROM banner");
+        $query = mysqli_query($conn, "SELECT * FROM banner");
         while ($row = mysqli_fetch_array($query)) {
             echo "<tr>
                 <td>{$row['id_banner']}</td>

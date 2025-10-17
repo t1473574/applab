@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <title>Kelola Service - Admin Hotel</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">
@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'])) {
         <tbody>
             <?php
             $no = 1;
-            $query = mysqli_query($koneksi, "SELECT * FROM service ORDER BY id_service DESC");
+            $query = mysqli_query($conn, "SELECT * FROM service ORDER BY id_service DESC");
             if (mysqli_num_rows($query) > 0) {
                 while ($row = mysqli_fetch_array($query)) {
                     echo "

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Tambah Banner</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">
@@ -22,7 +22,7 @@ if (isset($_POST['simpan'])) {
     $gambar = $_FILES['gambar']['name'];
     $tmp = $_FILES['gambar']['tmp_name'];
     move_uploaded_file($tmp, "../upload/" . $gambar);
-    mysqli_query($koneksi, "INSERT INTO banner (judul, gambar) VALUES ('$judul', '$gambar')");
+    mysqli_query($conn, "INSERT INTO banner (judul, gambar) VALUES ('$judul', '$gambar')");
     header("Location: index.php");
 }
 ?>

@@ -1,13 +1,13 @@
 <?php
 include "../lib/koneksi.php";
 $id = $_GET['id'];
-$data = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM banner WHERE id_banner='$id'"));
+$data = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM banner WHERE id_banner='$id'"));
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Banner</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">
@@ -28,9 +28,9 @@ if (isset($_POST['update'])) {
         $gambar = $_FILES['gambar']['name'];
         $tmp = $_FILES['gambar']['tmp_name'];
         move_uploaded_file($tmp, "../upload/" . $gambar);
-        mysqli_query($koneksi, "UPDATE banner SET judul='$judul', gambar='$gambar' WHERE id_banner='$id'");
+        mysqli_query($conn, "UPDATE banner SET judul='$judul', gambar='$gambar' WHERE id_banner='$id'");
     } else {
-        mysqli_query($koneksi, "UPDATE banner SET judul='$judul' WHERE id_banner='$id'");
+        mysqli_query($conn, "UPDATE banner SET judul='$judul' WHERE id_banner='$id'");
     }
     header("Location: index.php");
 }

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Tambah Service</title>
-    <link rel="stylesheet" href="../aset/style.css">
+    <link rel="stylesheet" href="../asset/style.css">
 </head>
 <body>
 <div class="container">
@@ -20,7 +20,7 @@
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama'];
     $desk = $_POST['deskripsi'];
-    mysqli_query($koneksi, "INSERT INTO service (nama, deskripsi) VALUES ('$nama', '$desk')");
+    mysqli_query($conn, "INSERT INTO service (nama, deskripsi) VALUES ('$nama', '$desk')");
     header("Location: index.php");
 }
 ?>
