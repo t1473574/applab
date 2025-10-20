@@ -1,7 +1,7 @@
 <?php
 // login.php
 session_start();
-require_once 'db.php';
+require_once '../lib/koneksi.php';
 
 $errors = [];
 // Jika form dikirim
