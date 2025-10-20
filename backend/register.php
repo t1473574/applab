@@ -1,49 +1,44 @@
 <?php
-session_start();
 include "../lib/koneksi.php";
 
 $errors = [];
+$success = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm'];
 
-    if ($email === '') {
-        $errors[] = "Email wajib diisi.";
+    // Validasi dasar
+    if ($email === '' || $password === '' || $confirm === '') {
+        $errors[] = "Semua kolom wajib diisi.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Format email tidak valid.";
+    } elseif ($password !== $confirm) {
+        $errors[] = "Password dan konfirmasi password tidak cocok.";
     }
 
-    if ($password === '') {
-        $errors[] = "Password wajib diisi.";
-    }
-
+    // Cek duplikat email
     if (empty($errors)) {
-        // menyesuaikan nama tabel dan kolom: id_admin, email, pass
-        $stmt = $mysqli->prepare("SELECT id_admin, email, pass FROM admin WHERE email = ? LIMIT 1");
+        $check = $mysqli->prepare("SELECT id_admin FROM admin WHERE email = ?");
+        $check->bind_param("s", $email);
+        $check->execute();
+        $check->store_result();
 
-        if (!$stmt) {
-            $errors[] = "Query error: " . $mysqli->error;
+        if ($check->num_rows > 0) {
+            $errors[] = "Email sudah terdaftar, silakan gunakan email lain.";
         } else {
-            $stmt->bind_param('s', $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($row = $result->fetch_assoc()) {
-                // verifikasi password
-                if (password_verify($password, $row['pass'])) {
-                    $_SESSION['admin_id'] = $row['id_admin'];
-                    $_SESSION['admin_email'] = $row['email'];
-                    header("Location: dashboard.php");
-                    exit;
-                } else {
-                    $errors[] = "Email atau password salah.";
-                }
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $mysqli->prepare("INSERT INTO admin (email, pass) VALUES (?, ?)");
+            $stmt->bind_param("ss", $email, $hash);
+            if ($stmt->execute()) {
+                $success = "Registrasi berhasil! Silakan <a href='login.php'>login di sini</a>.";
             } else {
-                $errors[] = "Email atau password salah.";
+                $errors[] = "Terjadi kesalahan saat menyimpan data.";
             }
             $stmt->close();
         }
+        $check->close();
     }
 }
 ?>
@@ -52,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Login Admin Hotel</title>
+<title>Registrasi Admin Hotel</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap');
 
@@ -62,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --light: #f9f7f3;
   --error-bg: #FDECEC;
   --error-text: #B91C1C;
+  --success-bg: #E8F7E9;
+  --success-text: #166534;
 }
 
 body {
@@ -72,7 +69,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   color: var(--light);
 }
 
@@ -80,8 +76,8 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  filter: brightness(0.4);
+  background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  filter: brightness(0.45);
   z-index: -1;
 }
 
@@ -91,7 +87,7 @@ body {
   padding: 40px 32px;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  width: 360px;
+  width: 380px;
   text-align: center;
 }
 
@@ -124,7 +120,6 @@ label {
   border-radius: 8px;
   background: rgba(0,0,0,0.3);
   color: white;
-  box-sizing: border-box;
   font-size: 14px;
 }
 
@@ -152,14 +147,22 @@ label {
   transform: translateY(-1px);
 }
 
-.errors {
-  background: var(--error-bg);
-  color: var(--error-text);
+.errors, .success {
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 12px;
   font-size: 14px;
   text-align: left;
+}
+
+.errors {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.success {
+  background: var(--success-bg);
+  color: var(--success-text);
 }
 
 .footer-text {
@@ -182,8 +185,8 @@ label {
 <div class="bg-overlay"></div>
 
 <div class="card">
-  <h2>Hotel Admin Login</h2>
-  <p class="subtitle">Masuk ke sistem reservasi & manajemen hotel</p>
+  <h2>Registrasi Admin Hotel</h2>
+  <p class="subtitle">Buat akun untuk mengelola sistem reservasi hotel</p>
 
   <?php if (!empty($errors)): ?>
   <div class="errors">
@@ -195,6 +198,10 @@ label {
   </div>
   <?php endif; ?>
 
+  <?php if ($success): ?>
+  <div class="success"><?= $success ?></div>
+  <?php endif; ?>
+
   <form method="post" action="">
     <label for="email">Email</label>
     <input id="email" class="input" type="email" name="email" required
@@ -203,11 +210,14 @@ label {
     <label for="password">Password</label>
     <input id="password" class="input" type="password" name="password" required>
 
-    <button type="submit" class="btn">Masuk</button>
+    <label for="confirm">Konfirmasi Password</label>
+    <input id="confirm" class="input" type="password" name="confirm" required>
+
+    <button type="submit" class="btn">Daftar Sekarang</button>
   </form>
 
   <p class="footer-text">
-    Belum punya akun? <a href="register.php">Daftar Sekarang</a>
+    Sudah punya akun? <a href="login.php">Login di sini</a>
   </p>
 </div>
 </body>
