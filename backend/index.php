@@ -61,47 +61,39 @@ $page = $_GET['page'] ?? 'dashboard';
 
 switch ($page) {
     case 'dashboard':
-        include 'backend/dashboard.php';
+        include 'dashboard.php';
         break;
 
     case 'kategori':
-        include 'backend/kate_kamar/data.php';
+        include 'kate_kamar/data.php';
         break;
 
     case 'kategori_add':
-        include 'backend/kate_kamar/add.php';
+        include 'kate_kamar/add.php';
         break;
 
     case 'kategori_edit':
-        include 'backend/kate_kamar/edit.php';
+        include 'kate_kamar/edit.php';
         break;
 
     case 'kategori_delete':
-        include 'backend/kate_kamar/delete.php';
+        include 'kate_kamar/delete.php';
         break;
 
     case 'kamar':
-        include 'backend/kamar/data.php';
+        include 'kamar/data.php';
         break;
 
     case 'kamar_add':
-        include 'backend/kamar/add.php';
+        include 'kamar/add.php';
         break;
 
     case 'kamar_edit':
-        include 'backend/kamar/edit.php';
+        include 'kamar/edit.php';
         break;
 
     case 'kamar_delete':
-        include 'backend/kamar/del.php';
-        break;
-
-    case 'banner':
-        include 'backend/banner/data.php';
-        break;
-
-    case 'service':
-        include 'backend/service/data.php';
+        include 'kamar/del.php';
         break;
 
     default:
