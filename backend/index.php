@@ -96,6 +96,40 @@ switch ($page) {
         include 'kamar/del.php';
         break;
 
+    case 'banner':
+        include 'banner/data.php';
+        break;
+
+    case 'banner_add':
+        include 'banner/add_banner.php';
+        break;
+
+    case 'banner_del':
+        include 'banner/delete_banner.php';
+        break;
+
+    case 'banner_edit':
+        include 'banner/edit_banner.php';
+        break;
+
+    case 'service':
+        include 'service/data.php';
+        break;
+
+    case 'service_add':
+        include 'service/add_service.php';
+        break;
+
+    
+    case 'service_del':
+        include 'service/delete_service.php';
+        break;
+
+        
+    case 'service_edit':
+        include 'service/edit_service.php';
+        break;
+
     default:
         echo "<h4>Halaman tidak ditemukan 😅</h4>";
         break;
