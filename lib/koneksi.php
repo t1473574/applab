@@ -4,7 +4,7 @@
 
 $host = "localhost";
 $user = "root"; // default user AppServ
-$pass = "";     // password kosong (jika tidak diubah)
+$pass = "syaira123";     // password kosong (jika tidak diubah)
 $db   = "applab"; // ganti dengan nama database kamu
 
 // buat koneksi
