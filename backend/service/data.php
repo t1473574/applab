@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
     </tr>
     <?php
     $no = 1;
-    $banner = mysqli_query($koneksi, "SELECT * FROM banner ORDER BY id_banner DESC");
+    $banner = mysqli_query($conn, "SELECT * FROM banner ORDER BY id_banner DESC");
     if (mysqli_num_rows($banner) > 0) {
         while ($r = mysqli_fetch_assoc($banner)) {
             echo "
@@ -67,7 +67,7 @@ if (!isset($_SESSION['username'])) {
     </tr>
     <?php
     $no2 = 1;
-    $service = mysqli_query($koneksi, "SELECT * FROM service ORDER BY id_service DESC");
+    $service = mysqli_query($conn, "SELECT * FROM service ORDER BY id_service DESC");
     if (mysqli_num_rows($service) > 0) {
         while ($s = mysqli_fetch_assoc($service)) {
             echo "
