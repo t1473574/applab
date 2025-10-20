@@ -1,1 +1,1 @@
-haloo
+<?php echo"haloo"?>
