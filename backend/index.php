@@ -37,7 +37,7 @@ include '../lib/koneksi.php';
         }
         .content {
             margin-left: 230px;
-            padding: 20px;
+            padding: 20px; 
         }
     </style>
 </head>
@@ -51,7 +51,7 @@ include '../lib/koneksi.php';
     <a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">Kamar</a>
     <a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">Banner</a>
     <a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">Service</a>
-    <a href="logout.php" class="text-danger">Logout</a>
+    <a href="login.php" class="text-danger">Login</a>
 </div>
 
 <!-- CONTENT -->
