@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* default navbar color, bisa diubah via input warna di runtime */
+        .navbar {
+            background-color: #05203C;
+            transition: background-color 0.25s ease;
+        }
+
+        .btn {
+            background-color: #173a5f;
+            color: #fff;
+            border-radius: 10px;
+            padding: 5px 15px;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: white;
+            color: #0d6efd;
+        }
+
+        body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+    /* Navbar */
+    .navbar {
+      background-color: #002B5B;
+    }
+    .navbar-brand, .nav-link, .navbar-text {
+      color: white !important;
+    }
+    .btn-login {
+      background-color: white;
+      color: #002B5B;
+      font-weight: 500;
+      border-radius: 6px;
+      padding: 6px 16px;
+    }
+    /* Hero section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') center/cover no-repeat;
+      height: 400px;
+      position: relative;
+      color: white;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .search-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      max-width: 1000px;
+      margin: 20px auto 0;
+    }
+    /* Hotel cards */
+    .hotel-card img {
+      border-radius: 10px;
+    }
+    .hotel-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      padding: 0px;
+      text-align: left;
+    }
+    /* Fast facts section */
+    .fast-facts {
+      background-color: #002B5B;
+      color: white;
+      padding: 50px 0;
+    }
+    .fast-facts h5 {
+      font-weight: 600;
+    }
+
+    /* ===== centered feature section ===== */
+    .feature-row {
+      justify-content: center; /* center columns horizontally */
+      text-align: center;      /* center text inside columns */
+      align-items: center;     /* vertical align if different heights */
+    }
+    .feature-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+    .feature-col i {
+      font-size: 2rem;
+      color: #002B5B;
+    }
+    .feature-col h6 {
+      margin: 0;
+    }
+    /* optionally limit width of text for better line length on large screens */
+    .feature-col h6 { max-width: 320px; }
+
+    /* Footer */
+    footer {
+      background-color: #001E3C;
+      color: #ccc;
+      padding: 30px 0;
+      font-size: 14px;
+    }
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      /* Scroll snap container */
+      .snap-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        /* hapus height:100vh supaya konten mengalir normal */
+        height: auto;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .snap-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Each snap section fills viewport width */
+      .snap-section {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: flex-start; /* mulai dari atas, bukan center */
+  justify-content: center;
+  padding: 2rem 1rem; /* tambahkan padding-top jika perlu */
+  min-height: 60vh; /* opsional: pastikan section tidak terlalu pendek */
+}
+
+      .hotel-card img {
+        border-radius: 1rem;
+      }
+
+      .hotel-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform .3s;
+  margin: 0 auto;
+}
+
+      .hotel-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Dots navigation */
+  .dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.dots a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.3);
+  display: block;
+  transition: background 0.3s ease;
+}
+.dots a.active {
+  background: rgba(0,0,0,.8);
+}
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+      <img src="img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      <b>Hotel</b>
+    </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <!-- pindahkan navbar-nav ke kanan dengan ms-auto -->
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-question"></i>Help</a>
+            <div class="btn me-2">English (UK) 🇮🇩 Indonesia Rp IDR</div>
+            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-heart-fill"></i></a>
+            <div class="btn me-2">Login</div>
+          </div>          
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content container">
+      <h1 class="fw-bold display-5">Find the right hotel today</h1>
+    </div>
+  </section>
+
+  <section class="container my-5">
+    <div class="row g-4 feature-row">
+      <div class="col-md-4 feature-col">
+          <i class="bi bi-search"></i>
+          <h6 class="fw-bold">Find the best-value hotel for your dates, search by price or preference</h6>
+      </div>
+      <div class="col-md-4 feature-col">        
+          <i class="bi bi-tag-fill"></i>
+          <h6 class="fw-bold">Compare hotel deals across hundreds of providers, all in one place</h6>
+      </div>
+      <div class="col-md-4 feature-col">        
+          <i class="bi bi-door-open-fill"></i>
+          <h6 class="fw-bold">Look out for hotel with free cancellation or excellent ratings</h6>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <h4 class="fw-bold mb-4">Hotels in your home country</h4>
+    <p>Your next adventure may be closer than you think. Discover hotels just beyond your doorstep.</p>
+  </div>
+    
+<div class="snap-container">
+  <!-- PAGE 1 -->
+  <section id="page1" class="snap-section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Horison Arcadia Mangga Dua</h6>
+            <p class="mb-1 text-muted">4.4 ★ · Very good · 900 reviews</p>
+            <p class="fw-bold text-primary">Rp 333.247</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">The Ritz-Carlton Jakarta</h6>
+            <p class="mb-1 text-muted">4.8 ★ · Excellent · 1.200 reviews</p>
+            <p class="fw-bold text-primary">Rp 6.487.471</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Holiday Inn Express Jakarta</h6>
+            <p class="mb-1 text-muted">4.7 ★ · Excellent · 700 reviews</p>
+            <p class="fw-bold text-primary">Rp 822.010</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+    <section id="page1" class="snap-section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Horison Arcadia Mangga Dua</h6>
+            <p class="mb-1 text-muted">4.4 ★ · Very good · 900 reviews</p>
+            <p class="fw-bold text-primary">Rp 333.247</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">The Ritz-Carlton Jakarta</h6>
+            <p class="mb-1 text-muted">4.8 ★ · Excellent · 1.200 reviews</p>
+            <p class="fw-bold text-primary">Rp 6.487.471</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Holiday Inn Express Jakarta</h6>
+            <p class="mb-1 text-muted">4.7 ★ · Excellent · 700 reviews</p>
+            <p class="fw-bold text-primary">Rp 822.010</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+    <section id="page1" class="snap-section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Horison Arcadia Mangga Dua</h6>
+            <p class="mb-1 text-muted">4.4 ★ · Very good · 900 reviews</p>
+            <p class="fw-bold text-primary">Rp 333.247</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">The Ritz-Carlton Jakarta</h6>
+            <p class="mb-1 text-muted">4.8 ★ · Excellent · 1.200 reviews</p>
+            <p class="fw-bold text-primary">Rp 6.487.471</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="hotel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="img-fluid mb-2">
+            <h6 class="fw-bold">Holiday Inn Express Jakarta</h6>
+            <p class="mb-1 text-muted">4.7 ★ · Excellent · 700 reviews</p>
+            <p class="fw-bold text-primary">Rp 822.010</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <!-- Fast Facts Section -->
+  <section class="fast-facts">
+    <div class="container">
+      <h4 class="fw-bold mb-2">Fast facts</h4>
+      <p class="mb-5">Sleep easy, armed with the stuff that's good to know before you go</p>
+
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Hotel brands to choose from</h5>
+          <p>60+</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Hotel brands to choose from</h5>
+          <p>60+</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Hotel brands to choose from</h5>
+          <p>60+</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <!-- Popular Section -->
+  <section class="container my-5">
+    <div class="row">
+      <!-- Kota Populer -->
+      <div class="col-md-6">
+        <h5 class="fw-bold mb-4">Kota populer</h5>
+        <div class="d-flex mb-3 align-items-center">
+          <img src="https://images.unsplash.com/photo-1524492449092-71cb7f2c0a5d" class="rounded me-3" width="80" height="60">
+          <div>
+            <p class="mb-0 fw-semibold">Hotel di Kairo, Mesir</p>
+            <small class="text-muted">10559 hotel</small>
+          </div>
+        </div>
+        <div class="d-flex mb-3 align-items-center">
+          <img src="https://images.unsplash.com/photo-1544986581-efac024faf62" class="rounded me-3" width="80" height="60">
+          <div>
+            <p class="mb-0 fw-semibold">Hotel di Durban, Afrika Selatan</p>
+            <small class="text-muted">2015 hotel</small>
+          </div>
+        </div>
+        <div class="d-flex mb-3 align-items-center">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde" class="rounded me-3" width="80" height="60">
+          <div>
+            <p class="mb-0 fw-semibold">Hotel di Marrakesh, Maroko</p>
+            <small class="text-muted">10796 hotel</small>
+          </div>
+        </div>
+        <div class="d-flex mb-3 align-items-center">
+          <img src="https://images.unsplash.com/photo-1578566228717-65e8b02f29f2" class="rounded me-3" width="80" height="60">
+          <div>
+            <p class="mb-0 fw-semibold">Hotel di Johannesburg, Afrika Selatan</p>
+            <small class="text-muted">3075 hotel</small>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <img src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a" class="rounded me-3" width="80" height="60">
+          <div>
+            <p class="mb-0 fw-semibold">Hotel di Cape Town, Afrika Selatan</p>
+            <small class="text-muted">7523 hotel</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel Populer -->
+      <div class="col-md-6">
+        <h5 class="fw-bold mb-4">Hotel populer</h5>
+        <div class="d-flex mb-3 align-items-center justify-content-between border-bottom pb-2">
+          <div class="d-flex align-items-center">
+            <img src="https://images.unsplash.com/photo-1551887373-6ab8faad5045" class="rounded me-3" width="80" height="60">
+            <div>
+              <p class="mb-0 fw-semibold">Blue Waters Hotel</p>
+              <small class="text-muted">4056 Durban, Afrika Selatan</small>
+            </div>
+          </div>
+          <span class="badge bg-primary fs-6">8.3</span>
+        </div>
+        <div class="d-flex mb-3 align-items-center justify-content-between border-bottom pb-2">
+          <div class="d-flex align-items-center">
+            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2103c" class="rounded me-3" width="80" height="60">
+            <div>
+              <p class="mb-0 fw-semibold">Hilton Cairo Grand Nile</p>
+              <small class="text-muted">Kairo, Mesir</small>
+            </div>
+          </div>
+          <span class="badge bg-primary fs-6">8.0</span>
+        </div>
+        <div class="d-flex mb-3 align-items-center justify-content-between border-bottom pb-2">
+          <div class="d-flex align-items-center">
+            <img src="https://images.unsplash.com/photo-1578898887932-56f5e62f4c2c" class="rounded me-3" width="80" height="60">
+            <div>
+              <p class="mb-0 fw-semibold">Savoy Le Grand Hotel Marrakech</p>
+              <small class="text-muted">Hivernage, 40000 Marrakesh, Maroko</small>
+            </div>
+          </div>
+          <span class="badge bg-primary fs-6">8.5</span>
+        </div>
+        <div class="d-flex mb-3 align-items-center justify-content-between border-bottom pb-2">
+          <div class="d-flex align-items-center">
+            <img src="https://images.unsplash.com/photo-1519821172141-b5d8bdfda5d1" class="rounded me-3" width="80" height="60">
+            <div>
+              <p class="mb-0 fw-semibold">Kozi Suites Nairobi Airport</p>
+              <small class="text-muted">Nairobi, Kenya</small>
+            </div>
+          </div>
+          <span class="badge bg-primary fs-6">8.2</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39" class="rounded me-3" width="80" height="60">
+            <div>
+              <p class="mb-0 fw-semibold">Tembo House Hotel</p>
+              <small class="text-muted">Zanzibar City, Tanzania</small>
+            </div>
+          </div>
+          <span class="badge bg-primary fs-6">8.2</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Modernized) -->
+  <footer class="footer-modern text-white py-5" style="background-color:#002B5B;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Versi Mobile</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Aplikasi Android</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Aplikasi iOS</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Akun Anda</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Masuk / Daftar</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Ubah pemesanan</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Bantuan</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Hubungi kami</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">FAQ</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Mitra</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Daftarkan properti</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Bergabung dengan afiliasi</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <small class="text-white-50">© 2025 HotelBooking. All Rights Reserved.</small>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+    <script>
+      const sections = document.querySelectorAll('.snap-section');
+      const dots = document.querySelectorAll('.dots a');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            dots.forEach(d => d.classList.remove('active'));
+            document.querySelector(`a[href='#${entry.target.id}']`).classList.add('active');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      sections.forEach(sec => observer.observe(sec));
+    </script>
