@@ -1,3 +1,4 @@
+
 <?php
 // koneksi.php
 
@@ -14,3 +15,4 @@ if ($mysqli->connect_errno) {
     die("Koneksi database gagal: " . $mysqli->connect_error);
 }
 ?>
+
