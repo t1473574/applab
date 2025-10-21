@@ -78,6 +78,7 @@ include '../lib/koneksi.php';
 
 <!-- SIDEBAR -->
 <div class="sidebar">
+<<<<<<< HEAD
     <h5 class="text-center mb-4"><i class="fa-solid fa-hotel"></i> Admin Hotel</h5>
     <a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">
         <i class="fa-solid fa-chart-line"></i> Dashboard
@@ -97,6 +98,24 @@ include '../lib/koneksi.php';
     <a href="login.php" class="text-danger">
         <i class="fa-solid fa-sign-out-alt"></i> Logout
     </a>
+=======
+    <h5 class="text-center mb-4">🏨 Admin Hotel</h5>
+    <a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">Dashboard</a>
+    <a href="?page=kategori" class="<?= ($_GET['page'] ?? '')=='kategori' ? 'active' : '' ?>">Kategori Kamar</a>
+    <a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">Kamar</a>
+    <a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">Banner</a>
+    <a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">Service</a>
+
+  <?php if (isset($_SESSION['admin_id'])): ?>
+    <!-- Kalau SUDAH login -->
+    <a href="logout.php" class="text-danger">Logout</a>
+  <?php else: ?>
+    <!-- Kalau BELUM login -->
+    <a href="login.php" class="text-danger">Login</a>
+  <?php endif; ?>
+
+</a>
+>>>>>>> 022428eb5ce802ae627c407acc179beccc0259eb
 </div>
 
 <!-- CONTENT -->
