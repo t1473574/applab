@@ -51,7 +51,16 @@ include '../lib/koneksi.php';
     <a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">Kamar</a>
     <a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">Banner</a>
     <a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">Service</a>
+
+  <?php if (isset($_SESSION['admin_id'])): ?>
+    <!-- Kalau SUDAH login -->
+    <a href="logout.php" class="text-danger">Logout</a>
+  <?php else: ?>
+    <!-- Kalau BELUM login -->
     <a href="login.php" class="text-danger">Login</a>
+  <?php endif; ?>
+
+</a>
 </div>
 
 <!-- CONTENT -->
