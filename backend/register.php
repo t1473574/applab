@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Cek duplikat email
     if (empty($errors)) {
-        $check = $mysqli->prepare("SELECT id_admin FROM admin WHERE email = ?");
+        $check = $mysqli->prepare("SELECT id_admin FROM tb_admin WHERE email = ?");
         $check->bind_param("s", $email);
         $check->execute();
         $check->store_result();
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Email sudah terdaftar, silakan gunakan email lain.";
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $mysqli->prepare("INSERT INTO admin (email, pass) VALUES (?, ?)");
+            $stmt = $mysqli->prepare("INSERT INTO tb_admin (email, pass) VALUES (?, ?)");
             $stmt->bind_param("ss", $email, $hash);
             if ($stmt->execute()) {
                 $success = "Registrasi berhasil! Silakan <a href='login.php'>login di sini</a>.";

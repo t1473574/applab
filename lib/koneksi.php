@@ -5,7 +5,7 @@
 $host = "localhost";
 $user = "root"; // default user AppServ
 $pass = "syaira123";     // password kosong (jika tidak diubah)
-$db   = "applab"; // ganti dengan nama database kamu
+$db   = "db_hotel"; // ganti dengan nama database kamu
 
 // buat koneksi
 $mysqli = new mysqli($host, $user, $pass, $db);
