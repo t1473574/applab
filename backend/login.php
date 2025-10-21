@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         // menyesuaikan nama tabel dan kolom: id_admin, email, pass
-        $stmt = $mysqli->prepare("SELECT id_admin, email, pass FROM tb_admin WHERE email = ? LIMIT 1");
+        $stmt = $mysqli->prepare("SELECT id_admin, email, pass FROM admin WHERE email = ? LIMIT 1");
 
         if (!$stmt) {
             $errors[] = "Query error: " . $mysqli->error;
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (password_verify($password, $row['pass'])) {
                     $_SESSION['admin_id'] = $row['id_admin'];
                     $_SESSION['admin_email'] = $row['email'];
-                    header("Location: index.php");
+                    header("Location: dashboard.php");
                     exit;
                 } else {
                     $errors[] = "Email atau password salah.";
