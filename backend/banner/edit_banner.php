@@ -1,37 +1,42 @@
 <?php
 include "../lib/koneksi.php";
 $id = $_GET['id'];
-$data = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM banner WHERE id_banner='$id'"));
+$data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM tb_banner WHERE id_banner='$id'"));
+
+if (isset($_POST['update'])) {
+    $teks = $_POST['teks'];
+    $gambarLama = $data['gambar'];
+
+    if ($_FILES['gambar']['name']) {
+        $gambarBaru = $_FILES['gambar']['name'];
+        $tmp = $_FILES['gambar']['tmp_name'];
+        move_uploaded_file($tmp, "../upload/" . $gambarBaru);
+    } else {
+        $gambarBaru = $gambarLama;
+    }
+
+    mysqli_query($koneksi, "UPDATE tb_banner SET gambar='$gambarBaru', teks='$teks' WHERE id_banner='$id'");
+    header("Location: data.php");
+}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Edit Banner</title>
-    <link rel="stylesheet" href="../asset/style.css">
+  <meta charset="UTF-8">
+  <title>Edit Banner</title>
+  <link rel="stylesheet" href="../aset/style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Edit Banner</h1>
-    <form method="post" enctype="multipart/form-data">
-        <input type="text" name="judul" value="<?= $data['judul']; ?>" required><br>
-        <img src="../upload/<?= $data['gambar']; ?>" width="150"><br>
-        <input type="file" name="gambar"><br>
-        <button type="submit" name="update">Update</button>
-    </form>
+  <h1>✏️ Edit Banner</h1>
+  <form method="post" enctype="multipart/form-data">
+    <label>Gambar Sekarang:</label><br>
+    <img src="../upload/<?= htmlspecialchars($data['gambar']) ?>" width="200"><br><br>
+    <input type="file" name="gambar">
+    <label>Teks Banner:</label>
+    <textarea name="teks" required><?= htmlspecialchars($data['teks']) ?></textarea>
+    <button type="submit" name="update">Perbarui</button>
+  </form>
 </div>
 </body>
 </html>
-<?php
-if (isset($_POST['update'])) {
-    $judul = $_POST['judul'];
-    if (!empty($_FILES['gambar']['name'])) {
-        $gambar = $_FILES['gambar']['name'];
-        $tmp = $_FILES['gambar']['tmp_name'];
-        move_uploaded_file($tmp, "../upload/" . $gambar);
-        mysqli_query($conn, "UPDATE banner SET judul='$judul', gambar='$gambar' WHERE id_banner='$id'");
-    } else {
-        mysqli_query($conn, "UPDATE banner SET judul='$judul' WHERE id_banner='$id'");
-    }
-    header("Location: index.php");
-}
-?>
