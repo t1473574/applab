@@ -78,27 +78,6 @@ include '../lib/koneksi.php';
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-<<<<<<< HEAD
-    <h5 class="text-center mb-4"><i class="fa-solid fa-hotel"></i> Admin Hotel</h5>
-    <a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">
-        <i class="fa-solid fa-chart-line"></i> Dashboard
-    </a>
-    <a href="?page=kategori" class="<?= ($_GET['page'] ?? '')=='kategori' ? 'active' : '' ?>">
-        <i class="fa-solid fa-layer-group"></i> Kategori Kamar
-    </a>
-    <a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">
-        <i class="fa-solid fa-bed"></i> Kamar
-    </a>
-    <a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">
-        <i class="fa-solid fa-image"></i> Banner
-    </a>
-    <a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">
-        <i class="fa-solid fa-concierge-bell"></i> Service
-    </a>
-    <a href="login.php" class="text-danger">
-        <i class="fa-solid fa-sign-out-alt"></i> Logout
-    </a>
-=======
     <h5 class="text-center mb-4">🏨 Admin Hotel</h5>
     <a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">Dashboard</a>
     <a href="?page=kategori" class="<?= ($_GET['page'] ?? '')=='kategori' ? 'active' : '' ?>">Kategori Kamar</a>
@@ -115,7 +94,6 @@ include '../lib/koneksi.php';
   <?php endif; ?>
 
 </a>
->>>>>>> 022428eb5ce802ae627c407acc179beccc0259eb
 </div>
 
 <!-- CONTENT -->
