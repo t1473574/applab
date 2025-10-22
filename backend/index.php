@@ -74,7 +74,7 @@ switch ($page) {
         break;
 
     case 'kategori':
-        include 'backend/kate_kamar/data.php';
+        include 'kate_kamar/data.php';
         break;
 
     case 'kategori_add':
