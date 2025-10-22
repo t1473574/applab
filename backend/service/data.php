@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../lib/koneksi.php";
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['admin_id'])) {
     header("Location: ../login/index.php");
     exit;
 }
@@ -10,45 +10,18 @@ if (!isset($_SESSION['email'])) {
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Data Banner & Service Hotel</title>
+  <title>Data Service</title>
   <link rel="stylesheet" href="../aset/style.css">
 </head>
 <body>
 <div class="container">
-  <h1>📋 Data Banner & Service Hotel</h1>
+  <h1>📋 Data Service</h1>
 
   <div class="nav">
     <a href="../login/logout.php" class="btn-danger">🚪 Logout</a>
     <a href="add_banner.php">➕ Tambah Banner</a>
     <a href="add_service.php">➕ Tambah Service</a>
   </div>
-
-  <!-- ======== DATA BANNER ======== -->
-  <h2>📸 Data Banner</h2>
-  <table>
-    <tr><th>No</th><th>Gambar</th><th>Teks</th><th>Aksi</th></tr>
-    <?php
-    $no = 1;
-    $banner = mysqli_query($koneksi, "SELECT * FROM tb_banner ORDER BY id_banner DESC");
-    if (mysqli_num_rows($banner) > 0) {
-        while ($b = mysqli_fetch_assoc($banner)) {
-            echo "
-            <tr>
-              <td>$no</td>
-              <td><img src='../upload/".htmlspecialchars($b['gambar'])."' width='120'></td>
-              <td>".htmlspecialchars($b['teks'])."</td>
-              <td>
-                <a href='edit_banner.php?id={$b['id_banner']}'>✏️ Edit</a>
-                <a href='delete_banner.php?id={$b['id_banner']}' class='btn-danger' onclick=\"return confirm('Hapus banner ini?')\">🗑️ Hapus</a>
-              </td>
-            </tr>";
-            $no++;
-        }
-    } else {
-        echo "<tr><td colspan='4' class='center'>Belum ada data banner</td></tr>";
-    }
-    ?>
-  </table>
 
   <!-- ======== DATA SERVICE ======== -->
   <h2 style="margin-top:40px;">🧾 Data Service</h2>
