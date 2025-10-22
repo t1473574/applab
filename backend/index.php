@@ -22,15 +22,15 @@ if (!isset($_SESSION['admin_id'])) {
 <style>
     body {
     font-family: 'Poppins', sans-serif;
-    background: #f3f4f6;
-    color: #1f1f1f;
+    background: #f4f7fa;
+    color: #1e1e2f;
     margin: 0;
 }
 
 .sidebar {
     width: 260px;
     height: 100vh;
-    background: linear-gradient(180deg, #0b1d3a, #132c4f);
+    background: linear-gradient(180deg, #0f1c4d, #1e3c72);
     position: fixed;
     left: 0;
     top: 0;
@@ -43,14 +43,16 @@ if (!isset($_SESSION['admin_id'])) {
 
 .sidebar h5 {
     font-family: 'Playfair Display', serif;
-    color: #eab543;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 30px;
     font-size: 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 15px;
 }
 
 .sidebar a {
-    color: #dcdcdc;
+    color: #cfd8ff;
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 8px;
@@ -58,31 +60,39 @@ if (!isset($_SESSION['admin_id'])) {
     display: flex;
     align-items: center;
     transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .sidebar a i {
     margin-right: 12px;
     width: 20px;
     text-align: center;
+    font-size: 16px;
 }
 
 .sidebar a:hover,
 .sidebar a.active {
-    background: rgba(234, 181, 67, 0.15);
-    color: #eab543;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    transform: scale(1.02);
+}
+
+.sidebar a.text-danger {
+    color: #ff4d4d !important;
+    margin-top: auto;
 }
 
 .content {
     margin-left: 260px;
     padding: 50px;
     min-height: 100vh;
-    background: #fefefe;
+    background: #f9fbfe;
 }
 
 .content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
-    color: #0b1d3a;
+    color: #1e3c72;
     margin-bottom: 30px;
 }
 
@@ -94,8 +104,8 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 .table th {
-    background-color: #0b1d3a;
-    color: #eab543;
+    background-color: #1e3c72;
+    color: #ffffff;
     padding: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -107,47 +117,55 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 .btn-primary {
-    background-color: #0b1d3a;
+    background-color: #1e3c72;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
+    transition: background-color 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: #eab543;
-    color: #0b1d3a;
+    background-color: #3f5ea5;
+    color: #fff;
 }
 
 .btn-danger {
-    background-color: #c0392b;
+    background-color: #e74c3c;
     border: none;
     border-radius: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
 }
 
 .btn-danger:hover {
-    background-color: #e74c3c;
+    background-color: #c0392b;
 }
 
 .btn-warning {
     background-color: #f39c12;
     border: none;
     border-radius: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
 }
 
 .btn-warning:hover {
     background-color: #e67e22;
 }
 
-input[type="text"], textarea, input[type="file"] {
+input[type="text"], textarea, input[type="file"], select {
     border-radius: 10px;
     border: 1px solid #ccc;
     padding: 12px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 footer {
     margin-top: 60px;
     text-align: center;
     color: #999;
+    font-size: 14px;
 }
 
 </style>
