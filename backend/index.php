@@ -1,6 +1,10 @@
 <?php
 session_start();
 include '../lib/koneksi.php';
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,89 +15,169 @@ include '../lib/koneksi.php';
     <title>Admin Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            overflow-x: hidden;
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: #f3f4f6;
+    color: #1f1f1f;
+    margin: 0;
+}
 
-        .sidebar {
-            height: 100vh;
-            background-color: #2c3e50;
-            color: #fff;
-            position: fixed;
-            width: 250px;
-            top: 0;
-            left: 0;
-            padding-top: 30px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0b1d3a, #132c4f);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.2);
+    z-index: 100;
+}
 
-        .sidebar h5 {
-            font-weight: bold;
-            color: #f1c40f;
-        }
+.sidebar h5 {
+    font-family: 'Playfair Display', serif;
+    color: #eab543;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+}
 
-        .sidebar a {
-            color: #bdc3c7;
-            display: block;
-            padding: 12px 25px;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 15px;
-        }
+.sidebar a {
+    color: #dcdcdc;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
 
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #34495e;
-            color: #fff;
-        }
+.sidebar a i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+}
 
-        .sidebar a i {
-            margin-right: 10px;
-        }
+.sidebar a:hover,
+.sidebar a.active {
+    background: rgba(234, 181, 67, 0.15);
+    color: #eab543;
+}
 
-        .content {
-            margin-left: 250px;
-            padding: 30px;
-            min-height: 100vh;
-            background: linear-gradient(to bottom right, #ffffff, #f3f4f6);
-        }
+.content {
+    margin-left: 260px;
+    padding: 50px;
+    min-height: 100vh;
+    background: #fefefe;
+}
 
-        .navbar-brand {
-            font-weight: bold;
-        }
+.content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #0b1d3a;
+    margin-bottom: 30px;
+}
 
-        .content h4 {
-            margin-bottom: 20px;
-        }
+.table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
 
-        .table th {
-            background-color: #34495e;
-            color: #fff;
-        }
-    </style>
+.table th {
+    background-color: #0b1d3a;
+    color: #eab543;
+    padding: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+.btn-primary {
+    background-color: #0b1d3a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #eab543;
+    color: #0b1d3a;
+}
+
+.btn-danger {
+    background-color: #c0392b;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-danger:hover {
+    background-color: #e74c3c;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+input[type="text"], textarea, input[type="file"] {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 12px;
+}
+
+footer {
+    margin-top: 60px;
+    text-align: center;
+    color: #999;
+}
+
+</style>
+
 </head>
 <body>
 
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h5 class="text-center mb-4">🏨 Admin Hotel</h5>
-    <a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">Dashboard</a>
-    <a href="?page=kategori" class="<?= ($_GET['page'] ?? '')=='kategori' ? 'active' : '' ?>">Kategori Kamar</a>
-    <a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">Kamar</a>
-    <a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">Banner</a>
-    <a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">Service</a>
-
-  <?php if (isset($_SESSION['admin_id'])): ?>
-    <!-- Kalau SUDAH login -->
-    <a href="logout.php" class="text-danger">Logout</a>
-  <?php else: ?>
-    <!-- Kalau BELUM login -->
-    <a href="login.php" class="text-danger">Login</a>
-  <?php endif; ?>
-
+<a href="?page=dashboard" class="<?= (!isset($_GET['page']) || $_GET['page']=='dashboard') ? 'active' : '' ?>">
+  <i class="fas fa-home"></i> Dashboard
 </a>
+<a href="?page=kategori" class="<?= ($_GET['page'] ?? '')=='kategori' ? 'active' : '' ?>">
+  <i class="fas fa-list-ul"></i> Kategori Kamar
+</a>
+<a href="?page=kamar" class="<?= ($_GET['page'] ?? '')=='kamar' ? 'active' : '' ?>">
+  <i class="fas fa-bed"></i> Kamar
+</a>
+<a href="?page=banner" class="<?= ($_GET['page'] ?? '')=='banner' ? 'active' : '' ?>">
+  <i class="fas fa-image"></i> Banner
+</a>
+<a href="?page=service" class="<?= ($_GET['page'] ?? '')=='service' ? 'active' : '' ?>">
+  <i class="fas fa-concierge-bell"></i> Service
+</a>
+<a href="logout.php" class="text-danger mt-auto">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+
+
 </div>
 
 <!-- CONTENT -->

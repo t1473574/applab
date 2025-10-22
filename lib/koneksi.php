@@ -1,12 +1,9 @@
-
 <?php
 // koneksi.php
-
 $host = "localhost";
 $user = "root"; // default user AppServ
-$pass = "tia12345";     // password kosong (jika tidak diubah)
+$pass = "syaira123";     // password kosong (jika tidak diubah)
 $db   = "db_hotel"; // ganti dengan nama database kamu
-
 // buat koneksi
 $mysqli = new mysqli($host, $user, $pass, $db);
 
