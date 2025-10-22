@@ -8,40 +8,73 @@ include '../lib/koneksi.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin</title>
+    <title>Admin Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
             overflow-x: hidden;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .sidebar {
             height: 100vh;
-            background-color: #212529;
+            background-color: #2c3e50;
             color: #fff;
             position: fixed;
-            width: 230px;
+            width: 250px;
             top: 0;
             left: 0;
-            padding-top: 20px;
+            padding-top: 30px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
+
+        .sidebar h5 {
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
         .sidebar a {
-            color: #ccc;
+            color: #bdc3c7;
             display: block;
-            padding: 10px 20px;
+            padding: 12px 25px;
             text-decoration: none;
             transition: 0.3s;
+            font-size: 15px;
         }
+
         .sidebar a:hover, .sidebar a.active {
-            background-color: #495057;
+            background-color: #34495e;
             color: #fff;
         }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
         .content {
-            margin-left: 230px;
-            padding: 20px; 
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #ffffff, #f3f4f6);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .content h4 {
+            margin-bottom: 20px;
+        }
+
+        .table th {
+            background-color: #34495e;
+            color: #fff;
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
 <!-- SIDEBAR -->
 <div class="sidebar">
@@ -74,19 +107,19 @@ switch ($page) {
         break;
 
     case 'kategori':
-        include 'kate_kamar/data.php';
+        include 'kateKamar/data.php';
         break;
 
     case 'kategori_add':
-        include 'kate_kamar/add.php';
+        include 'kateKamar/add.php';
         break;
 
     case 'kategori_edit':
-        include 'kate_kamar/edit.php';
+        include 'kateKamar/edit.php';
         break;
 
     case 'kategori_delete':
-        include 'kate_kamar/delete.php';
+        include 'kateKamar/delete.php';
         break;
 
     case 'kamar':
@@ -129,12 +162,10 @@ switch ($page) {
         include 'service/add_service.php';
         break;
 
-    
     case 'service_del':
         include 'service/delete_service.php';
         break;
 
-        
     case 'service_edit':
         include 'service/edit_service.php';
         break;
