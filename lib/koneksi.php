@@ -1,5 +1,4 @@
 <?php
-// koneksi.php
 $host = "localhost";
 $user = "root"; // default user AppServ
 $pass = "syaira123";     // password kosong (jika tidak diubah)
