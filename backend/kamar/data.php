@@ -40,7 +40,7 @@ $result = mysqli_query($mysqli, $query);
                         echo "<td>{$no}</td>";
                         echo "<td><img src='uploads/{$row['gambar']}' width='100' alt='Gambar Kamar'></td>";
                         echo "<td>" . htmlspecialchars($row['nama_kamar']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['nama_kate']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['teks']) . "</td>";
                         echo "<td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>";
                         echo "<td><span class='badge bg-" . 
                             ($row['status'] == 'Tersedia' ? 'success' : ($row['status'] == 'Booking' ? 'warning' : 'secondary')) . "'>" . $row['status'] . "</span></td>";
