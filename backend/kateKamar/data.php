@@ -9,7 +9,7 @@ $result = mysqli_query($mysqli, $query);
 <div class="container">
     <h3 class="mb-4">Data Kategori Kamar</h3>
 
-    <a href="?page=kate_add" class="btn btn-primary mb-3">
+    <a href="?page=kategori_add" class="btn btn-primary mb-3">
         <i class="fas fa-plus"></i> Tambah Kategori
     </a>
 
@@ -33,10 +33,10 @@ $result = mysqli_query($mysqli, $query);
                         echo "<td><img src='uploads/{$row['gambar']}' width='100' alt='Gambar Kategori'></td>";
                         echo "<td>" . htmlspecialchars($row['teks']) . "</td>";
                         echo "<td>
-                                <a href='?page=kate_edit&id={$row['id_kate']}' class='btn btn-warning btn-sm'>
+                                <a href='?page=kategori_edit&id={$row['id_kate']}' class='btn btn-warning btn-sm'>
                                     <i class='fas fa-edit'></i>
                                 </a>
-                                <a href='?page=kate_delete&id={$row['id_kate']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin ingin menghapus kategori ini?');\">
+                                <a href='?page=kategori_delete&id={$row['id_kate']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin ingin menghapus kategori ini?');\">
                                     <i class='fas fa-trash'></i>
                                 </a>
                               </td>";
